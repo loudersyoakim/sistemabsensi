@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Absensi Cerdas</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/face-api.js/dist/face-api.min.js"
+    ></script>
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <header class="app-header">
+        <h1>Absensi Cerdas</h1>
+        <div class="mode-toggle">
+          <button id="modeSingle" class="active">Uni</button>
+          <button id="modeMulti">Multi</button>
+        </div>
+        <p class="subtitle">Verifikasi wajah dan lokasi untuk absensi</p>
+      </header>
+
+      <div class="media-wrapper">
+        <!-- Video -->
+        <div class="video-container">
+          <video
+            id="video"
+            width="360"
+            height="270"
+            autoplay
+            muted
+            playsinline
+          ></video>
+          <canvas id="overlay"></canvas>
+        </div>
+
+        <!-- Snapshot (Preview) -->
+        <canvas id="snapshot" width="360" height="270"></canvas>
+
+        <!-- Panel Wajah (Mode Multi) -->
+        <div class="faces-panel" id="facesPanel" style="display: none">
+          <h3>Wajah Terdeteksi</h3>
+          <div id="facesList" class="faces-list"></div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <p id="status" class="status-text">Memuat model, harap tunggu...</p>
+        <p id="location">Mengecek lokasi...</p>
+        <button id="retryLocation" class="retry-button" style="display: none">
+          Coba Lagi
+        </button>
+        <button id="captureBtn" class="capture-button" disabled>
+          Ambil Foto
+        </button>
+        <button id="absenBtn" class="absen-button" disabled>
+          Absen Sekarang
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
