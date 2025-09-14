@@ -1,0 +1,294 @@
+/* --- Import Font & Variabel Global --- */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #007bff;
+  --primary-hover: #0056b3;
+  --success-color: #28a745;
+  --success-hover: #1e7e34;
+  --light-gray: #f8f9fa;
+  --medium-gray: #e9ecef;
+  --dark-gray: #343a40;
+  --font-family: "Poppins", sans-serif;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --border-radius: 12px;
+}
+
+/* --- Reset & Gaya Dasar Body --- */
+body {
+  font-family: var(--font-family);
+  background-color: var(--light-gray);
+  color: var(--dark-gray);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* --- Container Utama Aplikasi --- */
+.container {
+  background-color: white;
+  padding: 30px 40px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 850px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.app-header .subtitle {
+  margin: 5px 0 0;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+/* --- Layout Media (Video & Snapshot / Faces Panel) --- */
+.media-wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* default mobile: tumpuk ke bawah */
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  background: black;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#video,
+#snapshot,
+#overlay {
+  border-radius: var(--border-radius);
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#snapshot {
+  display: none; /* Sembunyi default, tampil sesuai JS */
+  border: 2px solid var(--medium-gray);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --- Kontrol & Tombol --- */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  align-items: center;
+}
+
+.status-text {
+  font-weight: 500;
+  color: #495057;
+  min-height: 24px;
+}
+
+#location {
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+button {
+  font-family: var(--font-family);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 280px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.capture-button {
+  background-color: var(--primary-color);
+  color: white;
+}
+.capture-button:not(:disabled):hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+}
+
+.absen-button {
+  background-color: var(--success-color);
+  color: white;
+}
+.absen-button:not(:disabled):hover {
+  background-color: var(--success-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+}
+
+.retry-button {
+  background-color: #ffc107;
+  color: var(--dark-gray);
+  font-size: 0.9rem;
+  padding: 8px 15px;
+}
+.retry-button:hover {
+  background-color: #e0a800;
+}
+
+/* --- Mode Toggle --- */
+.mode-toggle {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.mode-toggle button {
+  flex: 1;
+  padding: 8px 0;
+  border-radius: 8px;
+  border: 1px solid var(--primary-color);
+  background: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mode-toggle button.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* --- Faces Panel & Daftar Wajah --- */
+.faces-panel {
+  flex: 1;
+  max-height: 270px;
+  overflow-y: auto;
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--border-radius);
+  padding: 10px;
+  background: #f8f9fa;
+}
+
+.faces-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.face-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--medium-gray);
+  padding-bottom: 5px;
+}
+
+.face-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--primary-color);
+}
+
+/* --- Loader Animation --- */
+.loader {
+  border: 4px solid var(--medium-gray);
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -20px;
+  margin-left: -20px;
+  display: none;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- Responsif: Desktop / Tablet --- */
+@media (min-width: 768px) {
+  .media-wrapper {
+    flex-direction: row; /* video kiri, snapshot/faces kanan */
+    align-items: flex-start;
+  }
+
+  .video-container {
+    order: 1; /* kiri */
+  }
+
+  #snapshot {
+    order: 2; /* kanan video di mode Uni */
+    display: block; /* tampil di desktop */
+    max-width: 360px;
+    border: 2px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+  }
+
+  .faces-panel {
+    order: 2; /* kanan video di mode Multi */
+    max-width: 360px;
+  }
+}
+
+/* --- Responsif Mobile --- */
+@media (max-width: 767px) {
+  #snapshot {
+    display: none; /* hanya tampil sesuai JS */
+  }
+}
